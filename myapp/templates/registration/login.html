@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if user.is_authenticated %}You're logged in {% else %} Sign in {% endif %}{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mx-auto my-5 text-center px-2">
+  <h3 class="text-2xl text-white">You are logged in</h3>
+  <div class="my-6">
+    <div>
+      <a href="{% url 'logout' %}" class="bg-blue-600 px-3 py-3 text-white rounded">Logout</a>
+    </div>
+    <div class="my-7">
+      <a href="/"  class="bg-blue-400 px-3 py-3 text-white rounded">Home</a>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container mx-auto my-5 text-center px-2">
+        <div class="w-full">
+          <div class="bg-white p-10 rounded-lg shadow-xl md:w-3/4 mx-auto lg:w-1/2">
+            <h3 class="mb-4 text-3xl">Login</h3>
+            <hr/>
+            <form action="" method="POST" class="my-4">
+                {% csrf_token %}
+                <p class="my-5">
+                    <label for="id_username"  class="block mb-2 font-bold text-gray-600">Username:</label> 
+                    <input type="text" name="username" autofocus autocapitalize="none"  class="border border-gray-400 shadow p-3 w-full rounded mb-" autocomplete="username" maxlength="150" required id="id_username">
+                </p>
+                <p >
+                    <label for="id_password"  class="block mb-2 font-bold text-gray-600">Password:</label> <input type="password" name="password" class="border border-gray-400 shadow p-3 w-full rounded mb-" autocomplete="current-password" required id="id_password">
+                </p>
+                <button class="bg-blue-700 py-2 text-white rounded my-4" style="width: 200px;">Sign in</button>
+            </form>
+            <a href="{% url 'password_reset' %}" class="text-blue-500">Forgot password?</a>
+            <div class="my-2">
+            <a href="{% url 'create-account' %}" class="text-blue-500">Don't have an account? Create one</a>
+            </div>
+          </div>
+        </div>
+</div>
+{% endif %}
+{% endblock content %}

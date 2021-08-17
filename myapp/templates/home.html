@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Website - home{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto my-5 text-center px-2">
+        <div class="w-full">
+          <div class="bg-white p-10 rounded-lg shadow-xl md:w-3/4 mx-auto lg:w-1/2">
+            {% if user.is_authenticated %}
+            <h3 class="mb-4 text-3xl">Hello {{ user.first_name }}!!</h3>
+            {% else %}
+            <h3 class="mb-4 text-3xl">Hello Visitor!!</h3>
+            {% endif %}
+            <img src="https://res.cloudinary.com/dhlqqrm9f/image/upload/v1627423762/djangoproject2/media/django-python_ptze4d.png" />
+            {% if user.is_authenticated == False %}
+            <div class="my-6">
+                <div>
+                   <a href="{% url 'create-account' %}" class="bg-blue-500 px-3 py-3 text-white rounded">Create account</a>
+                </div>
+                <div class="my-7">
+                   <a href="{% url 'login' %}" class="bg-blue-300 px-3 py-3 text-white rounded">Sign in</a>
+                </div>
+              </div>
+            {% else %}
+              <div class="my-6">
+                <div>
+                   <a href="{% url 'logout' %}" class="bg-blue-500 px-3 py-3 text-white rounded">Logout</a>
+                </div>
+                <div class="my-7">
+                   <a href="{% url 'account' %}" class="bg-blue-700 px-3 py-3 text-white rounded">Account</a>
+                </div>
+                {% comment %} <div class="my-7">
+                   <a href="{% url 'login' %}" class="bg-blue-300 px-3 py-3 text-white rounded">Sign in</a>
+                </div> {% endcomment %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+</div>
+{% endblock content %}
