@@ -1,1 +1,6 @@
 jstools/node_modules/
+db.sqlite3
+Scripts/
+Lib/
+Include/
+.env
